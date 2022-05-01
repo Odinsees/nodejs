@@ -1,0 +1,54 @@
+<h1>add partners</h1>
+<form action="/add" method="POST">
+  <div class="row">
+    <div class="input-field">
+      <input
+        name="name"
+        value=""
+        id="title"
+        type="text"
+        class="validate"
+        required
+      />
+      <label class="active" for="first_name2">Partners name</label>
+      <span
+        class="helper-text"
+        data-error="write a name"
+        data-success="right"
+      ></span>
+    </div>
+    <div class="input-field">
+      <input
+        name="number"
+        value=""
+        id="number"
+        type="tel"
+        class="validate"
+        required
+      />
+      <label class="active" for="first_name2">Partners number</label>
+      <span
+        class="helper-text"
+        data-error="write a number"
+        data-success="right"
+      ></span>
+    </div>
+    <div class="input-field">
+      <input
+        name="img"
+        value=""
+        id="image"
+        type="text"
+        class="validate"
+        required
+      />
+      <label class="active" for="first_name2">Partners logo url</label>
+      <span
+        class="helper-text"
+        data-error="add logo url"
+        data-success="right"
+      ></span>
+    </div>
+    <button class="btn btn-primary">Add partner</button>
+  </div>
+</form>

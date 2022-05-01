@@ -1,0 +1,23 @@
+<nav>
+  <div class="nav-wrapper">
+    <a href="#" class="brand-logo">AMSI TECHNO</a>
+    <ul id="nav-mobile" class="right hide-on-med-and-down">
+      {{#if isHome}}
+        <li class="active"><a href="/">MAIN</a></li>
+      {{else}}
+        <li><a href="/">MAIN</a></li>
+      {{/if}}
+      {{#if isPartners}}
+        <li class="active"><a href="/partners">PARTNERS</a></li>
+      {{else}}
+        <li><a href="/partners">PARTNERS</a></li>
+      {{/if}}
+      {{#if isAdd}}
+        <li class="active"><a href="/add">ADD NEW PARTNER</a></li>
+      {{else}}
+        <li><a href="/add">ADD NEW PARTNER</a></li>
+      {{/if}}
+
+    </ul>
+  </div>
+</nav>

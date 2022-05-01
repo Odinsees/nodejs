@@ -1,19 +1,20 @@
 {
-  "name": "course",
+  "name": "node-express",
   "version": "1.0.0",
-  "description": "test project nodejs",
+  "description": "",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js"
   },
-  "keywords": [
-    "nodejs",
-    "js"
-  ],
-  "author": "Lebedev Pavel <pavel.o.lebedev@gmail.com>",
+  "keywords": [],
+  "author": "",
   "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.1",
+    "express-handlebars": "^6.0.5"
+  },
   "devDependencies": {
-    "nodemon": "^2.0.15"
+    "nodemon": "^2.0.16"
   }
 }
