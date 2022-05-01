@@ -1,31 +1,49 @@
 const http = require("http");
+const fs = require("fs");
+const path = require("path");
 
 const server = http.createServer((req, res) => {
   if (req.method === "GET") {
     res.writeHead(200, {
-      "Content-Type": "text/html",
+      "Content-Type": "text/html; charset=utf-8",
     });
-    res.end(`
-      <h1>FORM</h1>
-      <form method='post' action="/">
-      <input name="title" type="text"/>
-      <button type ="submit">submit</button>
-      </form>
-    `);
+    if (req.url === "/") {
+      fs.readFile(
+        path.join(__dirname, "views", "index.html"),
+        "utf-8",
+        (err, content) => {
+          if (err) {
+            throw err;
+          }
+          res.end(content);
+        }
+      );
+    } else if (req.url === "/about") {
+      fs.readFile(
+        path.join(__dirname, "views", "about.html"),
+        "utf-8",
+        (err, content) => {
+          if (err) {
+            throw err;
+          }
+          res.end(content);
+        }
+      );
+    }
   } else if (req.method === "POST") {
     const body = [];
-    res.writeHead(200,{
-      'Content-Type':'text/html; charset=utf-8'
-
-    })
+    res.writeHead(200, {
+      "Content-Type": "text/html; charset=utf-8",
+    });
     req.on("data", (data) => {
       body.push(Buffer.from(data));
     });
+    const querystring = require("querystring");
     req.on("end", () => {
-      const message = body.toString().split("=")[1];
+      const message = querystring.unescape(body.toString().split("=")[1]);
       res.end(`
-      <h1>Твоё сообщение: ${message} </h1>
-    `);
+        <h1>Ваше сообщение: ${message}</h1>
+      `);
     });
   }
 });
