@@ -1,0 +1,19 @@
+{
+  "name": "course",
+  "version": "1.0.0",
+  "description": "test project nodejs",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "keywords": [
+    "nodejs",
+    "js"
+  ],
+  "author": "Lebedev Pavel <pavel.o.lebedev@gmail.com>",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
