@@ -1,4 +1,5 @@
 const {Router} = require('express')
+const Partners = require('../modules/partners.js')
 const router = Router()
 
 router.get('/',(req,res)=>{
@@ -8,8 +9,9 @@ router.get('/',(req,res)=>{
   })
 })
 
-router.post('/',(req,res)=>{
-  console.log(req.body);
+router.post('/', async (req,res)=>{
+  const partner = new Partners(req.body.name, req.body.number, req.body.img)
+  await partner.save()
   res.redirect('/partners')
 })
 
