@@ -73,6 +73,7 @@ class Devices {
     });
   }
   static async getById(id){
+    console.log(id, 'ID');
     const devices = await Devices.getAll()
     return devices.find(device=> device.id === id)
   }

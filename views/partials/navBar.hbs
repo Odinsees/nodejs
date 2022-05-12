@@ -7,15 +7,23 @@
       {{else}}
         <li><a href="/">MAIN</a></li>
       {{/if}}
-      {{#if isPartners}}
+
+      {{#if isDevices}}
         <li class="active"><a href="/devices">DEVICES</a></li>
       {{else}}
         <li><a href="/devices">DEVICES</a></li>
       {{/if}}
+
       {{#if isAdd}}
         <li class="active"><a href="/add">ADD NEW DEVICES</a></li>
       {{else}}
         <li><a href="/add">ADD NEW DEVICES</a></li>
+      {{/if}}
+
+      {{#if isCard}}
+        <li class="active"><a href="/card">BASKET</a></li>
+      {{else}}
+        <li><a href="/card">BASKET</a></li>
       {{/if}}
 
     </ul>

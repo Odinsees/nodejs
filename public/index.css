@@ -25,3 +25,9 @@
 .device .price-big {
   font-size: 5rem;
 }
+
+.card-action.actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}

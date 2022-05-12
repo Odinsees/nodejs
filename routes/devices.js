@@ -1,5 +1,5 @@
 const { Router } = require("express");
-const Devices = require("../modules/devices");
+const Devices = require("../models/devices");
 const router = Router();
 
 router.get("/", async (req, res) => {

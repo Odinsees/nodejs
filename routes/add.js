@@ -1,5 +1,5 @@
 const {Router} = require('express')
-const Devices = require('../modules/devices.js')
+const Devices = require('../models/devices.js')
 const router = Router()
 
 router.get('/',(req,res)=>{
