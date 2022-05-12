@@ -1,16 +1,16 @@
-<h1>add devices</h1>
-<form action="/add" method="POST">
+<h1>Edit device info {{device.type}}</h1>
+<form action="/devices/edit" method="POST">
   <div class="row">
     <div class="input-field">
       <input
         name="type"
-        value=""
+        value="{{device.type}}"
         id="title"
         type="text"
         class="validate"
         required
       />
-      <label class="active" for="first_name2">device type</label>
+      <label class="active" for="first_name2">devices type</label>
       <span
         class="helper-text"
         data-error="write a type"
@@ -20,13 +20,13 @@
     <div class="input-field">
       <input
         name="price"
-        value=""
+        value="{{device.price}}"
         id="number"
         type="tel"
         class="validate"
         required
       />
-      <label class="active" for="first_name2">device price</label>
+      <label class="active" for="first_name2">devices price</label>
       <span
         class="helper-text"
         data-error="write a price"
@@ -36,19 +36,20 @@
     <div class="input-field">
       <input
         name="img"
-        value=""
+        value="{{device.img}}"
         id="image"
         type="text"
         class="validate"
         required
       />
-      <label class="active" for="first_name2">device logo url</label>
+      <label class="active" for="first_name2">devices logo url</label>
       <span
         class="helper-text"
         data-error="add logo url"
         data-success="right"
       ></span>
     </div>
-    <button class="btn btn-primary">Add device</button>
+    <input type="hidden" name="id" value="{{device.id}}" />
+    <button class="btn btn-primary">Edit device info</button>
   </div>
 </form>

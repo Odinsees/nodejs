@@ -1,18 +1,18 @@
 const {Router} = require('express')
-const Partners = require('../modules/partners.js')
+const Devices = require('../modules/devices.js')
 const router = Router()
 
 router.get('/',(req,res)=>{
   res.render('add',{
-    title:'ADD PARTNER',
+    title:'ADD DEVICES',
     isAdd:true,
   })
 })
 
 router.post('/', async (req,res)=>{
-  const partner = new Partners(req.body.name, req.body.number, req.body.img)
-  await partner.save()
-  res.redirect('/partners')
+  const device = new Devices(req.body.type, req.body.price, req.body.img)
+  await device.save()
+  res.redirect('/devices')
 })
 
 module.exports = router

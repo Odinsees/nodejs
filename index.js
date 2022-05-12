@@ -2,7 +2,7 @@ const express = require("express");
 const exphbs = require("express-handlebars");
 const homeRoutes = require( './routes/home')
 const addRoutes = require( './routes/add')
-const partnersRoutes = require( './routes/partners')
+const devicesRoutes = require( './routes/devices')
 
 const app = express();
 
@@ -19,7 +19,7 @@ app.use(express.static('public'))
 app.use(express.urlencoded({extended:true}))
 app.use('/',homeRoutes)
 app.use('/add',addRoutes)
-app.use('/partners',partnersRoutes)
+app.use('/devices',devicesRoutes)
 
 const PORT = process.env.PORT || 3000;
 
