@@ -10,9 +10,20 @@ router.get('/',(req,res)=>{
 })
 
 router.post('/', async (req,res)=>{
-  const device = new Devices(req.body.type, req.body.price, req.body.img)
-  await device.save()
-  res.redirect('/devices')
+  // const device = new Devices(req.body.type, req.body.price, req.body.img)
+
+  const device = new Devices({
+    type:req.body.type,
+    price:req.body.price,
+    img:req.body.img
+  })
+  try{
+    await device.save()
+    res.redirect('/devices')
+  }
+  catch(err){
+    console.log(e);
+  }
 })
 
 module.exports = router

@@ -50,6 +50,10 @@
       ></span>
     </div>
     <input type="hidden" name="id" value="{{device.id}}" />
-    <button class="btn btn-primary">Edit device info</button>
+    <button type="submit" class="btn btn-primary">Edit device info</button>
   </div>
+</form>
+<form action="/devices/remove" method="post">
+  <input type="hidden" name="id" value="{{device.id}}" />
+  <button class="btn red">Remove device</button>
 </form>

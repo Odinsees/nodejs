@@ -1,10 +1,15 @@
 const express = require("express");
 const exphbs = require("express-handlebars");
-const homeRoutes = require( './routes/home')
-const cardRoutes = require( './routes/card')
-const addRoutes = require( './routes/add')
-const devicesRoutes = require( './routes/devices')
+const homeRoutes = require("./routes/home");
+const cardRoutes = require("./routes/card");
+const addRoutes = require("./routes/add");
+const devicesRoutes = require("./routes/devices");
 const path = require("path");
+const mongoose = require("mongoose");
+
+
+const DB_USER = process.env.DB_USER_NAME;
+const DB_PWD = process.env.DB_USER_PWD;
 
 const app = express();
 
@@ -17,15 +22,31 @@ app.engine("hbs", hbs.engine);
 app.set("view engine", "hbs");
 app.set("views", "views");
 
-app.use(express.static(path.join(__dirname,'public')))
-app.use(express.urlencoded({extended:true}))
-app.use('/',homeRoutes)
-app.use('/add',addRoutes)
-app.use('/devices',devicesRoutes)
-app.use('/card',cardRoutes)
+app.use(express.static(path.join(__dirname, "public")));
+app.use(express.urlencoded({ extended: true }));
+app.use("/", homeRoutes);
+app.use("/add", addRoutes);
+app.use("/devices", devicesRoutes);
+app.use("/card", cardRoutes);
 
 const PORT = process.env.PORT || 3000;
 
-app.listen(PORT, () => {
-  console.log(`server is running on port ${PORT}`);
-});
+async function start() {
+  try {
+    await mongoose
+      .connect("mongodb://localhost:27017/mydbbone", {
+        user: "odin",
+        pass: "ruvyqatur",
+      })
+      .then(() => {
+        console.log("successfully connected to the database");
+      });
+    app.listen(PORT, () => {
+      console.log(`server is running on port ${PORT}`);
+    });
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+start();

@@ -23,7 +23,7 @@ class Card {
     }
     card.sumPrice += +addedDevice.price;
     return new Promise((res, rej) => {
-      fs.writeFile(p, JSON.stringify(card), (err) => {
+      fs.writeFile(p, JSON.stringify(card,null,2), (err) => {
         if (err) {
           rej(err);
         } else {
@@ -49,7 +49,7 @@ class Card {
       card.sumPrice -= +device.price
     }
     return new Promise((res, rej) => {
-      fs.writeFile(p, JSON.stringify(card), (err) => {
+      fs.writeFile(p, JSON.stringify(card,null,2), (err) => {
         if (err) {
           rej(err);
         } else {
