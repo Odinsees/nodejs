@@ -3,7 +3,11 @@ const Devices = require("../models/devices");
 const router = Router();
 
 router.get("/", async (req, res) => {
-  const devices = await Devices.find();
+  const devices = await Devices.find()
+  .populate('userId', 'email name')
+  .select('price type img')
+  ;
+  console.log(devices)
   const fixedDevices = devices.map(i => i.toObject());
   res.render("devices", {
     title: "DEVICES",
