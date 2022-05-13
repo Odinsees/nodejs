@@ -33,6 +33,32 @@ class Card {
     });
   }
 
+  static async remove(id){
+    const card = await Card.fetch()
+    const index = card.devices.findIndex(
+      (device) => device.id === id
+    );
+    const device = card.devices[index]
+    if(device.count === 1){
+      //delete
+      card.devices = card.devices.filter(device => device.id !== id)
+      card.sumPrice -= +device.price
+    }else{
+      //change count
+      device.count--
+      card.sumPrice -= +device.price
+    }
+    return new Promise((res, rej) => {
+      fs.writeFile(p, JSON.stringify(card), (err) => {
+        if (err) {
+          rej(err);
+        } else {
+          res(card);
+        }
+      });
+    });
+  }
+
   static async fetch() {
     return new Promise((res, rej) => {
       fs.readFile(p, "utf-8", (err, content) => {
