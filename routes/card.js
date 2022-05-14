@@ -2,18 +2,18 @@ const { Router } = require("express");
 const router = Router();
 const Devices = require("../models/devices");
 
-
-function mapCardItems(card){
- return card.items.map(item=>({
-   ...item.deviceId._doc,
-   count:item.count,
- }))
+function mapCardItems(card) {
+  return card.items.map((item) => ({
+    ...item.deviceId._doc,
+    count: item.count,
+    id:item.deviceId.id
+  }));
 }
 
-function computePrices(devices){
-  return devices.reduce((total, device)=>{
-    return total += device.price * device.count
-  },0)
+function computePrices(devices) {
+  return devices.reduce((total, device) => {
+    return (total += device.price * device.count);
+  }, 0);
 }
 
 router.post("/add", async (req, res) => {
@@ -23,14 +23,20 @@ router.post("/add", async (req, res) => {
 });
 
 router.delete("/remove/:id", async (req, res) => {
-  const device = await Card.remove(req.params.id);
-  res.status(200).json(device);
+  await req.user.removeFromCard(req.params.id);
+  const user = await req.user.populate("card.items.deviceId");
+  const devices = mapCardItems(user.card);
+  const price = +computePrices(devices)
+  const card = {
+    devices,
+    sumPrice: price,
+  };
+  res.status(200).json(card);
 });
 
 router.get("/", async (req, res) => {
   const user = await req.user.populate("card.items.deviceId");
-  const devices = mapCardItems(user.card)
-  console.log(user.card.items);
+  const devices = mapCardItems(user.card);
   res.render("card", {
     title: "Basket",
     isCard: true,

@@ -44,4 +44,18 @@ user.methods.addToCard = function (addedDevice) {
   return this.save()
 }; 
 
+user.methods.removeFromCard = function(id){
+  let itemsCloned = [...this.card.items];
+  const deviceIndex = itemsCloned.findIndex(
+    (device) => device.deviceId.toString() === id.toString()
+  );
+  if(itemsCloned[deviceIndex].count === 1){
+    itemsCloned = itemsCloned.filter(device => device.deviceId.toString() !== id.toString() )
+  }else{
+    itemsCloned[deviceIndex].count--
+  }
+  this.card = {items: itemsCloned}
+  return this.save()
+}
+
 module.exports = model("User", user);

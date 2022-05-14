@@ -25,6 +25,13 @@ const device = new Schema({
   }
 },opts);
 
+device.method('toClient', function(){
+  const device = this.toObject()
+  device.id = device._id
+  delete device._id
+  return device
+})
+
 
 
 module.exports = model("Devices", device);
