@@ -7,7 +7,7 @@ router.get("/", async (req, res) => {
   .populate('userId', 'email name')
   .select('price type img')
   ;
-  console.log(devices)
+  // console.log(devices)
   const fixedDevices = devices.map(i => i.toObject());
   res.render("devices", {
     title: "DEVICES",

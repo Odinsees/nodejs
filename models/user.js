@@ -27,4 +27,21 @@ const user = new Schema({
   },
 });
 
+user.methods.addToCard = function (addedDevice) {
+  const itemsCloned = [...this.card.items];
+  const deviceIndex = itemsCloned.findIndex(
+    (device) => device.deviceId.toString() === addedDevice.id.toString()
+  );
+  if (deviceIndex >= 0) {
+    itemsCloned[deviceIndex].count = itemsCloned[deviceIndex].count + 1;
+  } else {
+    itemsCloned.push({
+      count: 1,
+      deviceId: addedDevice.id,
+    });
+  }
+  this.card = {items: itemsCloned}
+  return this.save()
+}; 
+
 module.exports = model("User", user);

@@ -22,7 +22,7 @@ router.post("/", async (req, res) => {
     await device.save();
     res.redirect("/devices");
   } catch (err) {
-    console.log(e);
+    console.log(err);
   }
 });
 
