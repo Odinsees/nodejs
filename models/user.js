@@ -40,22 +40,29 @@ user.methods.addToCard = function (addedDevice) {
       deviceId: addedDevice.id,
     });
   }
-  this.card = {items: itemsCloned}
-  return this.save()
-}; 
+  this.card = { items: itemsCloned };
+  return this.save();
+};
 
-user.methods.removeFromCard = function(id){
+user.methods.removeFromCard = function (id) {
   let itemsCloned = [...this.card.items];
   const deviceIndex = itemsCloned.findIndex(
     (device) => device.deviceId.toString() === id.toString()
   );
-  if(itemsCloned[deviceIndex].count === 1){
-    itemsCloned = itemsCloned.filter(device => device.deviceId.toString() !== id.toString() )
-  }else{
-    itemsCloned[deviceIndex].count--
+  if (itemsCloned[deviceIndex].count === 1) {
+    itemsCloned = itemsCloned.filter(
+      (device) => device.deviceId.toString() !== id.toString()
+    );
+  } else {
+    itemsCloned[deviceIndex].count--;
   }
-  this.card = {items: itemsCloned}
-  return this.save()
-}
+  this.card = { items: itemsCloned };
+  return this.save();
+};
+
+user.methods.clearCard = function (){
+  this.card = { items: [] };
+  return this.save();
+};
 
 module.exports = model("User", user);

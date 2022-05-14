@@ -1,7 +1,10 @@
 const express = require("express");
 const exphbs = require("express-handlebars");
+const Handlebars = require('handlebars')
+const {allowInsecurePrototypeAccess} = require('@handlebars/allow-prototype-access')
 const homeRoutes = require("./routes/home");
 const cardRoutes = require("./routes/card");
+const orderRoutes = require("./routes/order");
 const addRoutes = require("./routes/add");
 const devicesRoutes = require("./routes/devices");
 const path = require("path");
@@ -16,6 +19,7 @@ const app = express();
 const hbs = exphbs.create({
   defaultLayout: "main",
   extname: "hbs",
+  handlebars: allowInsecurePrototypeAccess(Handlebars)
 });
 
 app.engine("hbs", hbs.engine);
@@ -39,6 +43,7 @@ app.use("/", homeRoutes);
 app.use("/add", addRoutes);
 app.use("/devices", devicesRoutes);
 app.use("/card", cardRoutes);
+app.use("/order", orderRoutes);
 
 
 
@@ -48,8 +53,8 @@ async function start() {
   try {
     await mongoose
       .connect("mongodb://localhost:27017/mydbbone", {
-        user: "odin",
-        pass: "ruvyqatur",
+        user: DB_USER,
+        pass: DB_PWD,
       })
       .then(() => {
         console.log("successfully connected to the database");

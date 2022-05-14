@@ -7,7 +7,6 @@ router.get("/", async (req, res) => {
   .populate('userId', 'email name')
   .select('price type img')
   ;
-  // console.log(devices)
   const fixedDevices = devices.map(i => i.toObject());
   res.render("devices", {
     title: "DEVICES",
@@ -25,6 +24,15 @@ router.get("/:id/edit", async (req, res) => {
     title:"Edit device info",
     device:device.toObject()
   })
+});
+
+router.get("/:id", async (req, res) => {
+  const device = await Devices.findById(req.params.id)
+  res.render("device",{
+    layout:'empty',
+    title:`Device ${device.type}`,
+    device:device.toObject()
+  });
 });
 
 router.post('/edit', async (req,res)=>{
@@ -48,13 +56,6 @@ router.post('/remove',async (req,res)=>{
   
 })
 
-router.get("/:id", async (req, res) => {
-  const device = await Devices.findById(req.params.id)
-  res.render("device",{
-    layout:'empty',
-    title:`Device ${device.type}`,
-    device:device.toObject()
-  });
-});
+
 
 module.exports = router;

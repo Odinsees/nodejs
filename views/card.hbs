@@ -28,6 +28,9 @@
       <strong>Price:</strong>
       <span class="price">{{sumPrice}}</span>
     </p>
+    <form action="/order" method="post">
+      <button type="submit" class="btn">Make order</button>
+    </form>
   {{else}}
     <p>Basket empty</p>
   {{/if}}

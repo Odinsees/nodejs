@@ -26,6 +26,12 @@
         <li><a href="/card">BASKET</a></li>
       {{/if}}
 
+      {{#if isOrder}}
+        <li class="active"><a href="/order">ORDER</a></li>
+      {{else}}
+        <li><a href="/order">ORDER</a></li>
+      {{/if}}
+
     </ul>
   </div>
 </nav>
