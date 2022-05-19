@@ -14,30 +14,32 @@
         <li><a href="/devices">DEVICES</a></li>
       {{/if}}
 
-      {{#if isAdd}}
-        <li class="active"><a href="/add">ADD NEW DEVICES</a></li>
-      {{else}}
-        <li><a href="/add">ADD NEW DEVICES</a></li>
-      {{/if}}
+      {{#if isAuth}}
+        {{#if isAdd}}
+          <li class="active"><a href="/add">ADD NEW DEVICES</a></li>
+        {{else}}
+          <li><a href="/add">ADD NEW DEVICES</a></li>
+        {{/if}}
 
-      {{#if isCard}}
-        <li class="active"><a href="/card">BASKET</a></li>
-      {{else}}
-        <li><a href="/card">BASKET</a></li>
-      {{/if}}
+        {{#if isCard}}
+          <li class="active"><a href="/card">BASKET</a></li>
+        {{else}}
+          <li><a href="/card">BASKET</a></li>
+        {{/if}}
 
-      {{#if isOrder}}
-        <li class="active"><a href="/order">ORDER</a></li>
+        {{#if isOrder}}
+          <li class="active"><a href="/order">ORDER</a></li>
+        {{else}}
+          <li><a href="/order">ORDER</a></li>
+        {{/if}}
+         <li><a href="/auth/logout">LOG OUT</a></li>
       {{else}}
-        <li><a href="/order">ORDER</a></li>
+        {{#if isLogin}}
+          <li class="active"><a href="/auth/login#login">SING IN</a></li>
+        {{else}}
+          <li><a href="/auth/login#login">SING IN</a></li>
+        {{/if}}
       {{/if}}
-
-      {{#if isLogin}}
-        <li class="active"><a href="/auth/login#login">SING IN</a></li>
-      {{else}}
-        <li><a href="/auth/login#login">SING IN</a></li>
-      {{/if}}
-
     </ul>
   </div>
 </nav>
