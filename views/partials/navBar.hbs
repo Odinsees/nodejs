@@ -32,6 +32,12 @@
         <li><a href="/order">ORDER</a></li>
       {{/if}}
 
+      {{#if isLogin}}
+        <li class="active"><a href="/auth/login#login">SING IN</a></li>
+      {{else}}
+        <li><a href="/auth/login#login">SING IN</a></li>
+      {{/if}}
+
     </ul>
   </div>
 </nav>

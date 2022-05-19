@@ -7,6 +7,7 @@ const cardRoutes = require("./routes/card");
 const orderRoutes = require("./routes/order");
 const addRoutes = require("./routes/add");
 const devicesRoutes = require("./routes/devices");
+const authRoutes = require("./routes/auth");
 const path = require("path");
 const mongoose = require("mongoose");
 const User = require("./models/user");
@@ -44,6 +45,7 @@ app.use("/add", addRoutes);
 app.use("/devices", devicesRoutes);
 app.use("/card", cardRoutes);
 app.use("/order", orderRoutes);
+app.use("/auth", authRoutes);
 
 
 
