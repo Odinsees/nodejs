@@ -2,16 +2,16 @@ const { Router } = require("express");
 const Devices = require("../models/devices.js");
 const router = Router();
 
-router.get("/", (req, res) => {
+const authMiddleware = require('../middleware/auth')
+
+router.get("/", authMiddleware , (req, res) => {
   res.render("add", {
     title: "ADD DEVICES",
     isAdd: true,
   });
 });
 
-router.post("/", async (req, res) => {
-  // const device = new Devices(req.body.type, req.body.price, req.body.img)
-
+router.post("/", authMiddleware, async (req, res) => {
   const device = new Devices({
     type: req.body.type,
     price: req.body.price,

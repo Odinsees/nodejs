@@ -1,6 +1,7 @@
 const { Router } = require("express");
 const router = Router();
 const Devices = require("../models/devices");
+const authMiddleware = require('../middleware/auth')
 
 function mapCardItems(card) {
   return card.items.map((item) => ({
@@ -16,13 +17,13 @@ function computePrices(devices) {
   }, 0);
 }
 
-router.post("/add", async (req, res) => {
+router.post("/add", authMiddleware,  async (req, res) => {
   const device = await Devices.findById(req.body.id);
   await req.user.addToCard(device);
   res.redirect("/card");
 });
 
-router.delete("/remove/:id", async (req, res) => {
+router.delete("/remove/:id", authMiddleware, async (req, res) => {
   await req.user.removeFromCard(req.params.id);
   const user = await req.user.populate("card.items.deviceId");
   const devices = mapCardItems(user.card);
@@ -34,7 +35,7 @@ router.delete("/remove/:id", async (req, res) => {
   res.status(200).json(card);
 });
 
-router.get("/", async (req, res) => {
+router.get("/", authMiddleware , async (req, res) => {
   const user = await req.user.populate("card.items.deviceId");
   const devices = mapCardItems(user.card);
   res.render("card", {
