@@ -1,41 +1,38 @@
-const { Router } = require("express");
-const Order = require("../models/order");
+const { Router } = require('express');
+const Order = require('../models/order');
 const router = Router();
-const authMiddleware = require('../middleware/auth')
+const authMiddleware = require('../middleware/auth');
 
-router.get("/", authMiddleware, async (req, res) => {
-  try{
+router.get('/', authMiddleware, async (req, res) => {
+  try {
     const orders = await Order.find({
-      'user.userId' : req.user.id
-    })
-    .populate('user.userId')
-    res.render("order", {
-      title: "Order",
+      'user.userId': req.user.id,
+    }).populate('user.userId');
+    res.render('order', {
+      title: 'Order',
       isOrder: true,
-      orders:orders.map(order=>{
-        return{
+      orders: orders.map(order => {
+        return {
           ...order._doc,
-          price: order.devices.reduce((total, item)=>{
-            return total += item.count * item.device.price
-          },0)
-        }
-      })
+          price: order.devices.reduce((total, item) => {
+            return (total += item.count * item.device.price);
+          }, 0),
+        };
+      }),
     });
+  } catch (err) {
+    console.log(err);
   }
-  catch(err){
-    console.log(err)
-  }
-  
 });
 
-router.post("/", authMiddleware, async (req, res) => {
-  try{
-    const user = await req.user.populate("card.items.deviceId");
-    const devices = user.card.items.map((item) => ({
+router.post('/', authMiddleware, async (req, res) => {
+  try {
+    const user = await req.user.populate('card.items.deviceId');
+    const devices = user.card.items.map(item => ({
       count: item.count,
-      device: {...item.deviceId._doc}
+      device: { ...item.deviceId._doc },
     }));
-  
+
     const order = new Order({
       user: {
         name: req.user.name,
@@ -43,12 +40,11 @@ router.post("/", authMiddleware, async (req, res) => {
       },
       devices: devices,
     });
-    await order.save()
-    await req.user.clearCard()
-  
-    res.redirect("order");
-  }
-  catch(err){
+    await order.save();
+    await req.user.clearCard();
+
+    res.redirect('order');
+  } catch (err) {
     console.log(err);
   }
 });

@@ -5,7 +5,8 @@ const user = new Schema({
     type: String,
     required: true,
   },
-  name: {
+  name: String,
+  password: {
     type: String,
     required: true,
   },
@@ -25,6 +26,9 @@ const user = new Schema({
       },
     ],
   },
+  avatarUrl: String,
+  resetPasswordToken: String,
+  resetPasswordTokenExp: Date,
 });
 
 user.methods.addToCard = function (addedDevice) {
@@ -60,7 +64,7 @@ user.methods.removeFromCard = function (id) {
   return this.save();
 };
 
-user.methods.clearCard = function (){
+user.methods.clearCard = function () {
   this.card = { items: [] };
   return this.save();
 };

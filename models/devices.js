@@ -1,40 +1,41 @@
-const { Schema, model } = require("mongoose");
+const { Schema, model } = require('mongoose');
 
 const opts = {
   toObject: {
-      virtuals: true,
+    virtuals: true,
   },
   toJSON: {
-      virtuals: true,
+    virtuals: true,
   },
 };
 
-const device = new Schema({
-  type: {
-    type: String,
-    required: true,
+const device = new Schema(
+  {
+    type: {
+      type: String,
+      required: true,
+    },
+    price: {
+      type: Number,
+      required: true,
+    },
+    img: String,
+    userId: {
+      type: Schema.Types.ObjectId,
+      ref: 'User',
+    },
   },
-  price:{
-    type:Number,
-    required: true,
-  },
-  img: String,
-  userId:{
-    type: Schema.Types.ObjectId,
-    ref:"User"
-  }
-},opts);
+  opts,
+);
 
-device.method('toClient', function(){
-  const device = this.toObject()
-  device.id = device._id
-  delete device._id
-  return device
-})
+device.method('toClient', function () {
+  const device = this.toObject();
+  device.id = device._id;
+  delete device._id;
+  return device;
+});
 
-
-
-module.exports = model("Devices", device);
+module.exports = model('Devices', device);
 
 // const { v4: uuidv4 } = require("uuid");
 // const fs = require("fs");

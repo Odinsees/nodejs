@@ -1,4 +1,7 @@
 <h1>Edit device info {{device.type}}</h1>
+{{#if error}}
+  <p class="alert">{{error}}</p>
+{{/if}}
 <form action="/devices/edit" method="POST">
   <div class="row">
     <div class="input-field">
@@ -50,10 +53,12 @@
       ></span>
     </div>
     <input type="hidden" name="id" value="{{device.id}}" />
+    <input type="hidden" name="_csrf" value="{{csrf}}" />
     <button type="submit" class="btn btn-primary">Edit device info</button>
   </div>
 </form>
 <form action="/devices/remove" method="post">
   <input type="hidden" name="id" value="{{device.id}}" />
+  <input type="hidden" name="_csrf" value="{{csrf}}" />
   <button class="btn red">Remove device</button>
 </form>

@@ -14,9 +14,12 @@
           <div class="card-action actions">
             <a href="/devices/{{id}}" target="_blank">About this devices</a>
             {{#if @root.isAuth}}
-              <a href="/devices/{{id}}/edit?allow=true">Edit information</a>
+              {{#ifEquals userId._id @root.userId}}
+                <a href="/devices/{{id}}/edit?allow=true">Edit information</a>
+              {{/ifEquals}}
               <form action="/card/add" method="POST">
                 <input type="hidden" name="id" value="{{id}}" />
+                <input type="hidden" name="_csrf" value="{{@root.csrf}}" />
                 <button type="submit" class="btn btn-primary">Buy</button>
               </form>
             {{/if}}

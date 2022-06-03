@@ -1,31 +1,26 @@
-const { Router } = require("express");
-const User = require("../models/user");
+const { Router } = require('express');
 const router = Router();
 
-router.get("/login", async (req, res) => {
-  res.render("auth/login", {
-    title: "Authorisation",
-    isLogin: true,
-  });
-});
+const { registerValidators } = require('../utils/validators');
 
-router.get("/logout", async (req, res) => {
-  req.session.destroy(()=>{
-    res.redirect('/auth/login#login')
-  }) 
-});
+const {
+  getAuthLoginController,
+  getAuthLogOutController,
+  postAuthLoginController,
+  postAuthRegisterController,
+  getAuthResetPasswordController,
+  getAuthResetPasswordWithTokenController,
+  postAuthChangePasswordController,
+  postResetPasswordController,
+} = require('../controllers/authController');
 
-router.post("/login", async (req, res) => {
-  const user = await User.findById('627e97fd015688b9f71797d3')
-  req.session.user = user
-  req.session.isAuthenticated = true;
-  req.session.save(err=>{
-    if(err){
-      throw err
-    }
-    res.redirect('/')
-  })
-  
-});
+router.get('/login', getAuthLoginController);
+router.post('/login', postAuthLoginController);
+router.get('/logout', getAuthLogOutController);
+router.get('/reset', getAuthResetPasswordController);
+router.post('/register', registerValidators, postAuthRegisterController);
+router.get('/password/:token', getAuthResetPasswordWithTokenController);
+router.post('/password', postAuthChangePasswordController);
+router.post('/reset', postResetPasswordController);
 
 module.exports = router;

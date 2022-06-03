@@ -1,14 +1,17 @@
 <h1>add devices</h1>
+{{#if error}}
+  <p class="alert">{{error}}</p>
+{{/if}}
 <form action="/add" method="POST">
   <div class="row">
     <div class="input-field">
       <input
         name="type"
-        value=""
         id="deviceType"
         type="text"
         class="validate"
         required
+        value="{{data.type}}"
       />
       <label class="active" for="first_name2">device type</label>
       <span
@@ -20,11 +23,11 @@
     <div class="input-field">
       <input
         name="price"
-        value=""
-        id="number"
-        type="tel"
+        id="price"
+        type="number"
         class="validate"
         required
+        value="{{data.price}}"
       />
       <label class="active" for="first_name2">device price</label>
       <span
@@ -36,11 +39,11 @@
     <div class="input-field">
       <input
         name="img"
-        value=""
         id="image"
         type="text"
         class="validate"
         required
+        value="{{data.img}}"
       />
       <label class="active" for="first_name2">device logo url</label>
       <span
@@ -49,6 +52,7 @@
         data-success="right"
       ></span>
     </div>
+    <input type="hidden" name="_csrf" value="{{csrf}}" />
     <button class="btn btn-primary">Add device</button>
   </div>
 </form>
