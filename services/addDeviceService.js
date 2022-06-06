@@ -1,16 +1,18 @@
-const Devices = require("../models/devices.js");
+const {
+  createNewDeviceModuleService,
+  saveDeviceModuleService,
+} = require('../services/models/devicesModelService');
 
-// no req, no res
 async function postAddDeviceService(data, userId) {
   const { type, price, img } = data;
-  const device = new Devices({
+  const device = await createNewDeviceModuleService({
     type,
     price,
     img,
     userId,
   });
 
-  return device.save();
+  return await saveDeviceModuleService({ device });
 }
 
 module.exports = {

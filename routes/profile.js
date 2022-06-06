@@ -1,7 +1,10 @@
 const { Router } = require('express');
 const authMiddleware = require('../middleware/auth');
-const User = require('../models/user');
 const router = Router();
+
+const {
+  changeProfileInfoController,
+} = require('../controllers/profileController');
 
 router.get('/', authMiddleware, async (req, res) => {
   res.render('profile', {
@@ -11,21 +14,6 @@ router.get('/', authMiddleware, async (req, res) => {
   });
 });
 
-router.post('/', authMiddleware, async (req, res) => {
-  try {
-    const user = await User.findById(req.user._id);
-    const toChange = {
-      name: req.body.name,
-    };
-    if (req.file) {
-      toChange.avatarUrl = req.file.path;
-    }
-    Object.assign(user, toChange);
-    await user.save();
-    res.redirect('/profile');
-  } catch (err) {
-    console.log(err);
-  }
-});
+router.post('/', authMiddleware, changeProfileInfoController);
 
 module.exports = router;

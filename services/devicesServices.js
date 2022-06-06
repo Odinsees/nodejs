@@ -4,7 +4,7 @@ const {
   findDeviceByIdService,
   findDeviceByIdAndUpdateService,
   deleteDeviceService,
-} = require('./models/devicesService');
+} = require('./models/devicesModelService');
 
 async function getDevicesService() {
   const devices = await Devices.find()

@@ -7,7 +7,7 @@ const {
   findUserByIdAndValidTokenService,
   saveUserService,
   createNewUserService,
-} = require('../services/models/userService');
+} = require('../services/models/userModelService');
 
 const getRandomBytes = require('../utils/getRandomBytes');
 
